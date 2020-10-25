@@ -5,6 +5,7 @@ using UnityEngine;
 public class DataManager : MonoBehaviour
 {
     public int numPlayers = 2;
+    public string[] playerNames;
 
     public static DataManager Instance { get; private set; } // static singleton
     void Awake()

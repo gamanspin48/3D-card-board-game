@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Starting Menu.unity
     guid: 0678036bfc36b604dbcab5ad5ada961a
   - enabled: 1
+    path: Assets/Scenes/Naming Players.unity
+    guid: e152430b4257aee489252e7d51845ea2
+  - enabled: 1
     path: Assets/Beginning.BoardGame.unity
     guid: 14a87bd55592c2345be4155db5b1dca8
   m_configObjects: {}
