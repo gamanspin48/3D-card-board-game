@@ -26,13 +26,21 @@ public class MainBoardManager : MonoBehaviour
 
     bool isPlay = true;
 
+    public static MainBoardManager Instance { get; private set; } // static singleton
+
+    public Vector3[] vectorPosition;
+
     void Awake()
     {
+        if (Instance == null) { Instance = this; }
+        else { Destroy(gameObject); }
+
         for (int i = 0; i < DataManager.Instance.numPlayers; i++)
         {
             players[i] = Instantiate(playersPrefab[i], playerPositions[i].position, Quaternion.identity).GetComponent<Player>();
         }
         playerText.text = DataManager.Instance.playerNames[0];
+        BoardsPosition();
     }
 
     void Update()
@@ -54,6 +62,7 @@ public class MainBoardManager : MonoBehaviour
                             {
                                 state = "idle";
                                 playerText.text = DataManager.Instance.playerNames[curIndexPlayer];
+                                players[curIndexPlayer].transform.position = boards[players[curIndexPlayer].curIndex].playerPositions[curIndexPlayer].transform.position;
                             }
                             
                         }
@@ -104,6 +113,16 @@ public class MainBoardManager : MonoBehaviour
         players[curIndexPlayer].curIndex ++;
         curDestinationBoard = boards[players[curIndexPlayer].curIndex];
         step--;
+    }
+
+    public void BoardsPosition() {
+        for (int i = 0; i < boards.Length; i++) {
+            for (int j = 0; j < boards[i].playerPositions.Length; j++) {
+                boards[i].playerPositions[j] = Instantiate(playersPrefab[j], playerPositions[j].transform.localPosition, Quaternion.identity, boards[i].transform).transform;
+                boards[i].playerPositions[j].transform.localPosition = vectorPosition[j];
+          
+            }
+        }
     }
 
 }
